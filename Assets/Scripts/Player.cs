@@ -38,12 +38,16 @@ public class Player : MonoBehaviour {
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
 		if(Input.GetKeyDown (KeyCode.Space) && controller.collisions.below) {
-			velocity.y = jumpVelocity;
+			velocity.y = jumpVelocity + controller.collisions.platformVelocity.y;
+			//velocity.x = velocity.x + controller.collisions.platformVelocity.x;
 		}
 
 		//velocity.x = input.x * moveSpeed;
 		float targetVelocityX = input.x * moveSpeed;
-		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
+		if (!(input.x < 0 && controller.collisions.left) || !(input.x > 0 && controller.collisions.right)) {
+			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+		}
+			//velocity.x = velocity.x + controller.collisions.platformVelocity.x;
 
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move(velocity * Time.deltaTime);

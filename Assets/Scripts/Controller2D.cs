@@ -17,7 +17,7 @@ public class Controller2D : RaycastController {
 		//only for debug content
 	}
 
-	public void Move(Vector3 velocity, bool standingOnPlatform = false){
+	public void Move(Vector3 velocity, bool standingOnPlatform = false, Vector3 platformVelocity = default(Vector3)){
 		//detection goes here
 		UpdateRaycastOrigins();
 		collisions.Reset ();
@@ -36,6 +36,7 @@ public class Controller2D : RaycastController {
 
 		if (standingOnPlatform) {
 			collisions.below = true;
+			collisions.platformVelocity = platformVelocity;
 		}
 		
 		transform.Translate (velocity);
@@ -180,6 +181,8 @@ public class Controller2D : RaycastController {
 		public bool descendingSlope;
 		public float slopeAngle, slopeAngleOld;
 		public Vector3 velocityOld;
+
+		public Vector3 platformVelocity;
 
 		public void Reset(){
 			above = below = false;
