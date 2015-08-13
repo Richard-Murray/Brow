@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
 	float accelerationTimeGrounded = 0.1f;
 	float moveSpeed = 6;
 
+	float timeSinceGrounded = 0;
+
 	//float gravity = -20;
 	//float jumpVelocity = 8;
 	float gravity;
@@ -35,26 +37,40 @@ public class Player : MonoBehaviour {
 			velocity.y = 0;
 		}
 
+		//Get input vector
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 
+
 		float targetVelocityX = 0;
-		if(Input.GetKeyDown (KeyCode.Space) && controller.collisions.below) {
+
+		timeSinceGrounded += Time.deltaTime;
+		if (controller.collisions.below == true)
+			timeSinceGrounded = 0;
+
+		//Take the platform's velocity into account when jumping
+		if(Input.GetKeyDown (KeyCode.Space) && (controller.collisions.below || timeSinceGrounded < 0.1f)) {
 			velocity.y = jumpVelocity + controller.collisions.platformVelocity.y;
-			targetVelocityX = controller.collisions.platformVelocity.x;
 			velocity.x = velocity.x + controller.collisions.platformVelocity.x;
+			targetVelocityX = controller.collisions.platformVelocity.x;
 		}
 
 		//velocity.x = input.x * moveSpeed;
+
+		//Calculate x velocity
 		if (!(input.x < 0 && controller.collisions.left) && !(input.x > 0 && controller.collisions.right)) {
 			targetVelocityX += input.x * moveSpeed;
 			velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
 		}
-		if ((controller.collisions.left && velocity.x < 0) || (controller.collisions.right && velocity.x > 0))
-			velocity.x = 0;
 
+		//Zero velocities if there is a collision on that axis
+		if ((controller.collisions.left && velocity.x < 0) || (controller.collisions.right && velocity.x > 0)) 
+			velocity.x = 0;
+		if (controller.collisions.above)
+			velocity.y = 0;
 
 			//velocity.x = velocity.x + controller.collisions.platformVelocity.x;
 
+		//Send move command through to the controller2D
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move(velocity * Time.deltaTime);
 	}
