@@ -37,6 +37,8 @@ public class Controller2D : RaycastController {
 		if (standingOnPlatform) {
 			collisions.below = true;
 			collisions.platformVelocity = platformVelocity;
+		} else {
+			collisions.platformVelocity = default(Vector3);
 		}
 		
 		transform.Translate (velocity);
