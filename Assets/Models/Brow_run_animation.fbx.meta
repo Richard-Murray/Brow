@@ -1,0 +1,163 @@
+fileFormatVersion: 2
+guid: 60a17a66eb90e534bb751808b06ab739
+timeCreated: 1439532892
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Brow_mesh
+    100002: //RootNode
+    100004: jnt_antenna
+    100006: jnt_antenna_top
+    100008: jnt_chest
+    100010: jnt_head
+    100012: jnt_hips
+    100014: jnt_L_ankle
+    100016: jnt_L_claw_lower1
+    100018: jnt_L_claw_lower2
+    100020: jnt_L_claw_upper1
+    100022: jnt_L_claw_upper2
+    100024: jnt_L_elbow
+    100026: jnt_L_eye
+    100028: jnt_L_eyebrow
+    100030: jnt_L_eyebrow_center
+    100032: jnt_L_eyebrow_left
+    100034: jnt_L_eyebrow_right
+    100036: jnt_L_femur
+    100038: jnt_L_foot
+    100040: jnt_L_knee
+    100042: jnt_L_shoulder
+    100044: jnt_L_toes
+    100046: jnt_L_wrist
+    100048: jnt_neck
+    100050: jnt_pelvis
+    100052: jnt_R_ankle
+    100054: jnt_R_claw_lower1
+    100056: jnt_R_claw_lower2
+    100058: jnt_R_claw_upper1
+    100060: jnt_R_claw_upper2
+    100062: jnt_R_elbow
+    100064: jnt_R_eye
+    100066: jnt_R_eyebrow
+    100068: jnt_R_eyebrow_center
+    100070: jnt_R_eyebrow_left
+    100072: jnt_R_eyebrow_right
+    100074: jnt_R_femur
+    100076: jnt_R_foot
+    100078: jnt_R_knee
+    100080: jnt_R_shoulder
+    100082: jnt_R_toes
+    100084: jnt_R_wrist
+    100086: jnt_reference
+    100088: jnt_skeleton
+    400000: Brow_mesh
+    400002: //RootNode
+    400004: jnt_antenna
+    400006: jnt_antenna_top
+    400008: jnt_chest
+    400010: jnt_head
+    400012: jnt_hips
+    400014: jnt_L_ankle
+    400016: jnt_L_claw_lower1
+    400018: jnt_L_claw_lower2
+    400020: jnt_L_claw_upper1
+    400022: jnt_L_claw_upper2
+    400024: jnt_L_elbow
+    400026: jnt_L_eye
+    400028: jnt_L_eyebrow
+    400030: jnt_L_eyebrow_center
+    400032: jnt_L_eyebrow_left
+    400034: jnt_L_eyebrow_right
+    400036: jnt_L_femur
+    400038: jnt_L_foot
+    400040: jnt_L_knee
+    400042: jnt_L_shoulder
+    400044: jnt_L_toes
+    400046: jnt_L_wrist
+    400048: jnt_neck
+    400050: jnt_pelvis
+    400052: jnt_R_ankle
+    400054: jnt_R_claw_lower1
+    400056: jnt_R_claw_lower2
+    400058: jnt_R_claw_upper1
+    400060: jnt_R_claw_upper2
+    400062: jnt_R_elbow
+    400064: jnt_R_eye
+    400066: jnt_R_eyebrow
+    400068: jnt_R_eyebrow_center
+    400070: jnt_R_eyebrow_left
+    400072: jnt_R_eyebrow_right
+    400074: jnt_R_femur
+    400076: jnt_R_foot
+    400078: jnt_R_knee
+    400080: jnt_R_shoulder
+    400082: jnt_R_toes
+    400084: jnt_R_wrist
+    400086: jnt_reference
+    400088: jnt_skeleton
+    4300000: Brow_mesh
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Brow_mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

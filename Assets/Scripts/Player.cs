@@ -4,6 +4,13 @@ using System.Collections;
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour {
 
+	public enum BrowPart{Fullbody, Head, Torso, Legs, HeadTorso, TorsoLegs, None};
+
+	[Header("BrowParts")]
+	public BrowPart partID;
+	public LayerMask playerMask;
+	public BrowPart makingContactWithPart = BrowPart.None;
+
 	[Header("Movement")]
 	public bool canJump;
 	public float maxJumpHeight = 4;
@@ -134,5 +141,14 @@ public class Player : MonoBehaviour {
 		//Send move command through to the controller2D
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move(velocity * Time.deltaTime);
+
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 6, playerMask);
+		Debug.DrawRay(transform.position, Vector2.down * 6, Color.red);
+		if (hit) {
+			print (hit.transform.gameObject.GetComponent<Player> ().partID);
+			makingContactWithPart = hit.transform.gameObject.GetComponent<Player> ().partID;
+		} else {
+			makingContactWithPart = BrowPart.None;
+		}
 	}
 }
