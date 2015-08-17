@@ -10,6 +10,13 @@ public class Player : MonoBehaviour {
 	public BrowPart partID;
 	public LayerMask playerMask;
 	public BrowPart makingContactWithPart = BrowPart.None;
+	public Vector3 partOffset;
+	[HideInInspector]
+	public bool isControlled = false;
+	[HideInInspector]
+	public bool isInWorld = false;
+	[HideInInspector]
+	public float timeSinceDetached = 0;
 
 	[Header("Movement")]
 	public bool canJump;
@@ -53,7 +60,11 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//Get input vector
-		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
+		Vector2 input;
+		if (isControlled)
+			input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
+		else
+			input = new Vector2 (0, 0);
 		int wallDirectionX = (controller.collisions.left) ? -1 : 1;
 		float targetVelocityX = 0;
 
@@ -111,7 +122,7 @@ public class Player : MonoBehaviour {
 			timeSinceGrounded = 0;
 
 		//Takes the platform's velocity into account when jumping
-		if(Input.GetKeyDown (KeyCode.Space) && canJump/* && (controller.collisions.below || timeSinceGrounded < 0.1f)*/) { //want to add buffered jumps
+		if(isControlled && Input.GetKeyDown (KeyCode.Space) && canJump/* && (controller.collisions.below || timeSinceGrounded < 0.1f)*/) { //want to add buffered jumps
 			if(wallSliding && canWallJump == true)	{
 				if(wallDirectionX == input.x){
 					velocity.x = -wallDirectionX * wallJumpClimb.x;
@@ -142,13 +153,15 @@ public class Player : MonoBehaviour {
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move(velocity * Time.deltaTime);
 
-		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 6, playerMask);
-		Debug.DrawRay(transform.position, Vector2.down * 6, Color.red);
-		if (hit) {
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 11, playerMask);
+		Debug.DrawRay(transform.position, Vector2.down * 11, Color.red);
+		if (hit && (hit.distance < 7 || partID == BrowPart.HeadTorso) && timeSinceDetached > 2) {
 			print (hit.transform.gameObject.GetComponent<Player> ().partID);
 			makingContactWithPart = hit.transform.gameObject.GetComponent<Player> ().partID;
 		} else {
 			makingContactWithPart = BrowPart.None;
 		}
+
+		timeSinceDetached += Time.deltaTime;
 	}
 }
