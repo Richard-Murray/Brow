@@ -41,12 +41,15 @@ public class Player : MonoBehaviour {
 	//float gravity = -20;
 	//float jumpVelocity = 8;
 	float gravity;
-	float maxJumpVelocity;
+	[HideInInspector]
+	public float maxJumpVelocity;
 	float minJumpVelocity;
-	Vector3 velocity;
+	[HideInInspector]
+	public Vector3 velocity;
 	float velocityXSmoothing;
 
-	Controller2D controller;
+	[HideInInspector]
+	public Controller2D controller;
 
 	// Use this for initialization
 	void Start () {
@@ -143,6 +146,10 @@ public class Player : MonoBehaviour {
 				velocity.x = velocity.x + controller.collisions.platformVelocity.x;
 				targetVelocityX = controller.collisions.platformVelocity.x;
 			}
+			else if((partID == BrowPart.Fullbody || partID == BrowPart.TorsoLegs) && !controller.collisions.below)
+			{
+				transform.parent.gameObject.GetComponent<PlayerManager>().DoubleJump(this.partID);
+			}
 		}
 
 		if (((velocity.x < 0 && controller.collisions.left) || (velocity.x > 0 && controller.collisions.right)) && !wallSliding) {
@@ -153,8 +160,8 @@ public class Player : MonoBehaviour {
 		velocity.y += gravity * Time.deltaTime;
 		controller.Move(velocity * Time.deltaTime);
 
-		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 11, playerMask);
-		Debug.DrawRay(transform.position, Vector2.down * 11, Color.red);
+		RaycastHit2D hit = Physics2D.Raycast (transform.position, Vector2.down, 1.1f, playerMask);
+		Debug.DrawRay(transform.position, Vector2.down * 1.1f, Color.red);
 		if (hit && (hit.distance < 7 || partID == BrowPart.HeadTorso) && timeSinceDetached > 2) {
 			print (hit.transform.gameObject.GetComponent<Player> ().partID);
 			makingContactWithPart = hit.transform.gameObject.GetComponent<Player> ().partID;
@@ -163,5 +170,7 @@ public class Player : MonoBehaviour {
 		}
 
 		timeSinceDetached += Time.deltaTime;
+
+		//velocity = default(Vector3);
 	}
 }

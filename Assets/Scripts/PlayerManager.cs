@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour {
 
 	Player.BrowPart currentControlledPart = Player.BrowPart.Head; //Only switches between head, torso and legs
 	Player.BrowPart previousControlledPart = Player.BrowPart.Head;
-	float inputDelay = 0.3f;
+	float inputDelay = 0.4f;
 	float timeSincePressed = 0;
 
 	// Use this for initialization
@@ -32,14 +32,14 @@ public class PlayerManager : MonoBehaviour {
 		HeadTorsoScript = HeadTorso.GetComponent<Player> ();
 		TorsoLegsScript = TorsoLegs.GetComponent<Player> ();
 
-		FullBody.SetActive (false);
-		FullBodyScript.isInWorld = false;
-		Head.SetActive (true);
-		HeadScript.isInWorld = true;
-		Torso.SetActive (true);
-		TorsoScript.isInWorld = true;
-		Legs.SetActive (true);
-		LegsScript.isInWorld = true;
+		FullBody.SetActive (true);
+		FullBodyScript.isInWorld = true;
+		Head.SetActive (false);
+		HeadScript.isInWorld = false;
+		Torso.SetActive (false);
+		TorsoScript.isInWorld = false;
+		Legs.SetActive (false);
+		LegsScript.isInWorld = false;
 		HeadTorso.SetActive (false);
 		HeadTorsoScript.isInWorld = false;
 		TorsoLegs.SetActive (false);
@@ -60,6 +60,10 @@ public class PlayerManager : MonoBehaviour {
 		}
 		if (HeadScript.makingContactWithPart == Player.BrowPart.TorsoLegs) {
 			CombineParts(Head, TorsoLegs);
+		}
+
+		if(Input.GetKeyDown(KeyCode.R)){
+			DebugResetParts();
 		}
 
 		if (Input.GetKeyDown (KeyCode.Alpha1) && timeSincePressed < inputDelay && previousControlledPart == Player.BrowPart.Head) {
@@ -128,6 +132,23 @@ public class PlayerManager : MonoBehaviour {
 
 
 		SetActiveParts ();
+	}
+
+	void DebugResetParts(){
+		FullBody.SetActive (true);
+		FullBodyScript.isInWorld = true;
+		Head.SetActive (false);
+		HeadScript.isInWorld = false;
+		Torso.SetActive (false);
+		TorsoScript.isInWorld = false;
+		Legs.SetActive (false);
+		LegsScript.isInWorld = false;
+		HeadTorso.SetActive (false);
+		HeadTorsoScript.isInWorld = false;
+		TorsoLegs.SetActive (false);
+		TorsoLegsScript.isInWorld = false;
+
+		FullBody.transform.position = new Vector3 (0, 2, 0);
 	}
 
 	void CombineParts (GameObject part1, GameObject part2) { //latter is the lower part
@@ -205,6 +226,8 @@ public class PlayerManager : MonoBehaviour {
 				LegsScript.isInWorld = true;
 				LegsScript.timeSinceDetached = 0;
 				Legs.transform.position = FullBody.transform.position - TorsoLegsScript.partOffset * 2;
+				//TEMPORARY
+				//LegsScript.velocity = part2Script.velocity;
 				part1.SetActive (true);
 				part1Script.isInWorld = true;
 				part1Script.timeSinceDetached = 0;
@@ -226,11 +249,11 @@ public class PlayerManager : MonoBehaviour {
 				Legs.SetActive(true);
 				LegsScript.isInWorld = true;
 				LegsScript.timeSinceDetached = 0;
-				Legs.transform.position = HeadTorso.transform.position - TorsoScript.partOffset;
+				Legs.transform.position = TorsoLegs.transform.position - TorsoScript.partOffset;
 				part1.SetActive (true);
 				part1Script.isInWorld = true;
 				part1Script.timeSinceDetached = 0;
-				part1.transform.position = HeadTorso.transform.position + part1Script.partOffset;
+				part1.transform.position = TorsoLegs.transform.position + part1Script.partOffset;
 			}
 
 		}
@@ -252,16 +275,22 @@ public class PlayerManager : MonoBehaviour {
 				Torso.SetActive(true);
 				TorsoScript.isInWorld = true;
 				TorsoScript.timeSinceDetached = 0;
-				Torso.transform.position = HeadTorso.transform.position + TorsoScript.partOffset;
+				Torso.transform.position = TorsoLegs.transform.position + TorsoScript.partOffset;
 				part1.SetActive (true);
 				part1Script.isInWorld = true;
 				part1Script.timeSinceDetached = 0;
-				part1.transform.position = HeadTorso.transform.position - part1Script.partOffset;
+				part1.transform.position = TorsoLegs.transform.position - part1Script.partOffset;
 			}
 		}
 
+		//FullBodyScript.velocity = part2Script.velocity;
+		//HeadScript.velocity = part2Script.velocity;
+		//TorsoScript.velocity = part2Script.velocity;
+		//LegsScript.velocity = part2Script.velocity;
+		//HeadTorsoScript.velocity = part2Script.velocity;
+		//TorsoLegsScript.velocity = part2Script.velocity;
 
-
+		part1Script.velocity = part2Script.velocity;
 		part2.SetActive (false);
 		part2Script.isInWorld = false;
 
@@ -294,6 +323,24 @@ public class PlayerManager : MonoBehaviour {
 			HeadTorsoScript.isControlled = false;
 		}
 
+	}
+
+	public void DoubleJump(Player.BrowPart partID)
+	{
+		if (partID == Player.BrowPart.Fullbody) {
+			DetachParts (Legs, FullBody);
+			HeadTorsoScript.velocity.y = HeadTorsoScript.maxJumpVelocity;
+			HeadTorsoScript.velocity.x = FullBodyScript.velocity.x;
+			HeadTorsoScript.controller.collisions.below = false;
+		} 
+		if (partID == Player.BrowPart.TorsoLegs) {
+			//temporary fix, torso controller is initialised in the start function which is not called until after
+			TorsoScript.controller = TorsoScript.transform.GetComponent<Controller2D>();
+			DetachParts (Legs, TorsoLegs);
+			TorsoScript.velocity.y = TorsoScript.maxJumpVelocity;
+			TorsoScript.velocity.x = TorsoLegsScript.velocity.x;
+			TorsoScript.controller.collisions.below = false;
+		}
 	}
 
 

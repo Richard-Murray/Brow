@@ -200,7 +200,7 @@ public class PlatformController : RaycastController {
 	void OnDrawGizmos(){
 		if (localWaypoints != null) {
 			Gizmos.color = Color.red;
-			float size = 3;
+			float size = 0.3f;
 	
 			for (int i = 0; i < localWaypoints.Length; i++) {
 				Vector3 globalWaypointPos = (Application.isPlaying)?globalWaypoints[i] : localWaypoints [i] + transform.position;
