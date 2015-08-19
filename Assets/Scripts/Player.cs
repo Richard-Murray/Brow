@@ -53,8 +53,12 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		controller = GetComponent<Controller2D>();
+		Initialise ();
+	}
 
+	public void Initialise(){
+		controller = GetComponent<Controller2D>();
+		
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs (gravity) * timeToJumpApex;
 		print ("Gravity: " + gravity + "Jump Velocity: " + maxJumpVelocity);
