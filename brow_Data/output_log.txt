@@ -16,7 +16,7 @@ Platform assembly: C:\Users\richard.murray\Desktop\PROJECTS\Brow\brow_Data\Manag
 Loading C:\Users\richard.murray\Desktop\PROJECTS\Brow\brow_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
 Platform assembly: C:\Users\richard.murray\Desktop\PROJECTS\Brow\brow_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\Users\richard.murray\Desktop\PROJECTS\Brow\brow_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.035 seconds
+- Completed reload, in  0.093 seconds
 desktop: 1680x1050 60Hz; virtual: 3360x1050 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
@@ -27,7 +27,7 @@ Gravity: -26.44628Jump Velocity: 14.54545
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
 
-Gravity: -19.83471Jump Velocity: 10.90909
+Gravity: -26.44628Jump Velocity: 14.54545
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
 
@@ -64,5 +64,17 @@ Gravity: -26.44628Jump Velocity: 14.54545
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 1ae8 -> priority: 1 
-  Thread -> id: 2dc -> priority: 1 
+  Thread -> id: 1948 -> priority: 1 
+  Thread -> id: 194c -> priority: 1 
+Legs
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Gravity: -19.83471Jump Velocity: 10.90909
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+
+Legs
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 65)
+

@@ -335,7 +335,7 @@ public class PlayerManager : MonoBehaviour {
 	public void DoubleJump(Player.BrowPart partID)
 	{
 		if (partID == Player.BrowPart.Fullbody) {
-			HeadTorsoScript.controller = HeadTorsoScript.transform.GetComponent<Controller2D>();
+			//HeadTorsoScript.controller = HeadTorsoScript.transform.GetComponent<Controller2D>();
 			DetachParts (Legs, FullBody);
 			HeadTorsoScript.velocity.y = HeadTorsoScript.maxJumpVelocity;
 			HeadTorsoScript.velocity.x = FullBodyScript.velocity.x;
@@ -344,7 +344,7 @@ public class PlayerManager : MonoBehaviour {
 		if (partID == Player.BrowPart.TorsoLegs) {
 			//temporary fix, torso controller is initialised in the start function which is not called until after
 			//the maxjumpv is also not set
-			TorsoScript.controller = TorsoScript.transform.GetComponent<Controller2D>();
+			//TorsoScript.controller = TorsoScript.transform.GetComponent<Controller2D>();
 			DetachParts (Legs, TorsoLegs);
 			TorsoScript.velocity.y = TorsoScript.maxJumpVelocity;
 			TorsoScript.velocity.x = TorsoLegsScript.velocity.x;
